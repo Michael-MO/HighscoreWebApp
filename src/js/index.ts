@@ -20,13 +20,12 @@ function trimQuotes (string: string)
 }
 
 // Get All Data from the REST Service, and append the data to a HTML table.
-function getScores(): void {
+function getScores(): void
+{
     axios.get(baseURL + '/highscores')
     .then(function (response) {
         for (let d of response.data) {
-            scoreboard.appendChild(document.createElement("tr")).setAttribute("id", JSON.stringify(d.id));
-
-            let tablerow = document.getElementById(JSON.stringify(d.id));
+            let tablerow = scoreboard.appendChild(document.createElement("tr"));
             tablerow.appendChild(document.createElement("td")).innerHTML = trimQuotes(JSON.stringify(d.name));
             tablerow.appendChild(document.createElement("td")).innerHTML = JSON.stringify(d.score);
         }
@@ -34,13 +33,18 @@ function getScores(): void {
 }
 
 // Function to Post the new JSON object.
-function addToScoreboard(event: MouseEvent) {
+function addToScoreboard(event: MouseEvent)
+{
     if(inputName.value != "" || inputScore.value != "")
     {
         axios.post(baseURL + '/highscores', {
             Name: inputName.value,
             Score: Number(inputScore.value)
         });
+
+        let tablerow = scoreboard.appendChild(document.createElement("tr"));
+        tablerow.appendChild(document.createElement("td")).innerHTML = inputName.value;
+        tablerow.appendChild(document.createElement("td")).innerHTML = inputScore.value;
     }
 }
 
