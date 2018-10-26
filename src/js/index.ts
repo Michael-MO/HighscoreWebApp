@@ -45,6 +45,9 @@ function addToScoreboard(event: MouseEvent)
         let tablerow = scoreboard.appendChild(document.createElement("tr"));
         tablerow.appendChild(document.createElement("td")).innerHTML = inputName.value;
         tablerow.appendChild(document.createElement("td")).innerHTML = inputScore.value;
+
+        inputName.value = "";
+        inputScore.value = "";
     }
 }
 
